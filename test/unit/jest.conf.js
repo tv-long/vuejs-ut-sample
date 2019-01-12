@@ -1,4 +1,5 @@
 const path = require('path')
+process.env.JEST_REPORT_FILE = path.resolve(__dirname, './reports/result.json')
 
 module.exports = {
   rootDir: path.resolve(__dirname, '../../'),
@@ -23,5 +24,16 @@ module.exports = {
     '!src/router/index.js',
     '!**/node_modules/**'
   ],
-  testURL: "http://localhost"
+  'coverageThreshold': {
+    'global': {
+      'branches': 80,
+      'functions': 80,
+      'lines': 80,
+      'statements': 80
+    }
+  },
+  'testResultsProcessor': 'jest-bamboo-reporter',
+  'coverageReporters': ['clover', 'text-summary', 'lcov'],
+  testPathIgnorePatterns: [],
+  testURL: 'http://localhost'
 }
